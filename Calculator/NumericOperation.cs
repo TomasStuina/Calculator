@@ -6,7 +6,7 @@ public abstract class NumericOperation<T> : NumericExpression<T> where T : struc
     {
     }
 
-    public override sealed string? PrintSentence() => $"{PrintExpressionSentence()} is {ToResult()}";
+    public sealed override string? PrintSentence() => $"{PrintExpressionSentence()} is {ToResult()}";
 
-    public override sealed string? Print() => $"{PrintExpression()} = {ToResult()}";
+    public sealed override string? Print() => $"{PrintExpression()} = {ToResult()}";
 }
