@@ -2,7 +2,7 @@
 
 public class Faculty : UnaryOperation<double>
 {
-    public Faculty(NumericExpression<double> operand) : base(EnsureIsPositiveInteger(operand))
+    public Faculty(NumericExpression<double> operand) : base(operand.ThrowIfNotPositiveInteger())
     {
     }
 
@@ -19,17 +19,5 @@ public class Faculty : UnaryOperation<double>
         }
 
         return factorial;
-    }
-
-    private static NumericExpression<double> EnsureIsPositiveInteger(NumericExpression<double> operand)
-    {
-        var operandValue = operand.ToResult();
-
-        if (!double.IsPositive(operandValue) || !double.IsInteger(operandValue))
-        {
-            throw new ArgumentException("Operand must be a positive integer.", nameof(operand));
-        }
-
-        return operand;
     }
 }
