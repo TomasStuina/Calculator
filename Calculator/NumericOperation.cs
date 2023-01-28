@@ -1,6 +1,6 @@
 ﻿namespace Calculator;
 
-public abstract class NumericOperation<T> : NumericExpression<T> where T : struct
+public class NumericOperation<T> : NumericExpression<T> where T : struct
 {
     protected NumericOperation() : base(default)
     {

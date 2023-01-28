@@ -5,7 +5,7 @@ public abstract class BinaryOperation<T> : NumericOperation<T> where T : struct
     private readonly NumericExpression<T> _firstOperand;
     private readonly NumericExpression<T> _secondOperand;
 
-    public BinaryOperation(NumericExpression<T> firstOperand, NumericExpression<T> secondOperand)
+    protected BinaryOperation(NumericExpression<T> firstOperand, NumericExpression<T> secondOperand)
     {
         _firstOperand = firstOperand;
         _secondOperand = secondOperand;

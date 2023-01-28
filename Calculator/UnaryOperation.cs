@@ -4,7 +4,7 @@ public abstract class UnaryOperation<T> : NumericOperation<T> where T : struct
 {
     private readonly NumericExpression<T> _operand;
 
-    public UnaryOperation(NumericExpression<T> operand)
+    protected UnaryOperation(NumericExpression<T> operand)
     {
         _operand = operand;
     }
