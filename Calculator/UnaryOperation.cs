@@ -11,13 +11,13 @@ public abstract class UnaryOperation<T> : NumericOperation<T> where T : struct
 
     public sealed override T ToResult() => ToResult(_operand.ToResult());
 
-    public sealed override string? PrintExpression() => Print(_operand.PrintExpression());
+    public sealed override string? PrintExpression() => PrintExpression(_operand.PrintExpression());
 
-    public sealed override string? PrintExpressionSentence() => PrintSentence(_operand.PrintExpressionSentence());
+    public sealed override string? PrintExpressionSentence() => PrintExpressionSentence(_operand.PrintExpressionSentence());
 
-    protected abstract string? Print(string? expression);
+    protected abstract string? PrintExpression(string? expression);
 
-    protected abstract string? PrintSentence(string? sentence);
+    protected abstract string? PrintExpressionSentence(string? sentence);
 
     protected abstract T ToResult(T value);
 }
