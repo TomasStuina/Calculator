@@ -6,15 +6,9 @@ public class Faculty : UnaryOperation<double>
     {
     }
 
-    protected override string? Print(string? expression)
-    {
-        return $"({expression}!)";
-    }
+    protected override string? PrintExpression(string? expression) => $"({expression}!)";
 
-    protected override string? PrintSentence(string? sentence)
-    {
-        return $"faculty of {sentence}";
-    }
+    protected override string? PrintExpressionSentence(string? sentence) => $"faculty of {sentence}";
 
     protected override double ToResult(double value)
     {
