@@ -14,4 +14,17 @@ public static class NumericExpressionExtensions
 
         return expression;
     }
+
+    public static NumericExpression<double> ThrowIfNotPositiveInteger(this NumericExpression<double> expression,
+        [CallerArgumentExpression(nameof(expression))] string paramName = "")
+    {
+        var expressionValue = expression.ToResult();
+
+        if (!double.IsPositive(expressionValue) || !double.IsInteger(expressionValue))
+        {
+            throw new ArgumentException("Must be a positive integer.", paramName);
+        }
+
+        return expression;
+    }
 }
