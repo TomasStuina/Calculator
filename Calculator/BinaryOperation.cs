@@ -15,7 +15,7 @@ public abstract class BinaryOperation<T> : NumericOperation<T> where T : struct
 
     public sealed override string? PrintExpressionSentence() => PrintExpressionSentence(_firstOperand.PrintExpressionSentence(), _secondOperand.PrintExpressionSentence());
 
-    public override sealed T ToResult() => ToResult(_firstOperand.ToResult(), _secondOperand.ToResult());
+    public sealed override T ToResult() => ToResult(_firstOperand.ToResult(), _secondOperand.ToResult());
 
     protected abstract string? PrintExpression(string? firstExpression, string? secondExpression);
 
