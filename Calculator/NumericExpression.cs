@@ -1,6 +1,6 @@
 ﻿namespace Calculator;
 
-public class NumericExpression<T> : INumericExpression<T> where T : struct
+public class NumericExpression<T> where T : struct
 {
     private readonly T _numericValue;
 
