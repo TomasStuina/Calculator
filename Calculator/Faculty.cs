@@ -30,12 +30,10 @@ public class Faculty : UnaryOperation<double>
     private static NumericExpression<double> EnsureIsPositiveInteger(NumericExpression<double> operand)
     {
         var operandValue = operand.ToResult();
-        var isPositiveInteger = BitConverter.DoubleToInt64Bits(operandValue) >= 0 
-            && double.IsFinite(operandValue) && operandValue == Math.Truncate(operandValue);
 
-        if (!isPositiveInteger)
+        if (!double.IsPositive(operandValue) || !double.IsInteger(operandValue))
         {
-            throw new ArgumentException("Operand must be a positive integer", nameof(operand));
+            throw new ArgumentException("Operand must be a positive integer.", nameof(operand));
         }
 
         return operand;
