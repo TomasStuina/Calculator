@@ -1,6 +1,6 @@
 ﻿namespace Calculator;
 
-public class NumericOperation<T> : NumericExpression<T> where T : struct
+public abstract class NumericOperation<T> : NumericExpression<T> where T : struct
 {
     public sealed override string? Print() => $"{CreateExpression()} = {ToResult()}";
 
