@@ -2,24 +2,30 @@
 
 public abstract class BinaryOperation<T> : NumericOperation<T> where T : struct
 {
-    private readonly NumericExpression<T> _firstOperand;
-    private readonly NumericExpression<T> _secondOperand;
+    private readonly INumericExpression? _firstOperand;
+    private readonly INumericExpression? _secondOperand;
+    private readonly T _firstOperandValue;
+    private readonly T _secondOperandValue;
 
     protected BinaryOperation(NumericExpression<T> firstOperand, NumericExpression<T> secondOperand)
     {
         _firstOperand = firstOperand;
         _secondOperand = secondOperand;
+        _firstOperandValue = firstOperand.ToResult();
+        _secondOperandValue = secondOperand.ToResult();
     }
 
-    public sealed override string? PrintExpression() => PrintExpression(_firstOperand.PrintExpression(), _secondOperand.PrintExpression());
+    public sealed override T ToResult() => ToResult(_firstOperandValue, _secondOperandValue);
 
-    public sealed override string? PrintExpressionSentence() => PrintExpressionSentence(_firstOperand.PrintExpressionSentence(), _secondOperand.PrintExpressionSentence());
+    protected sealed override string? CreateExpression() =>
+        CreateExpression(_firstOperand?.ToExpression(), _secondOperand?.ToExpression());
 
-    public sealed override T ToResult() => ToResult(_firstOperand.ToResult(), _secondOperand.ToResult());
+    protected sealed override string? CreateExpressionSentence() =>
+        CreateExpressionSentence(_firstOperand?.ToExpressionSentence(), _secondOperand?.ToExpressionSentence());
 
-    protected abstract string? PrintExpression(string? firstExpression, string? secondExpression);
+    protected abstract T ToResult(T firstOperandValue, T secondOperandValue);
 
-    protected abstract string? PrintExpressionSentence(string? firstSentence, string? secondSentence);
+    protected abstract string? CreateExpression(string? firstExpression, string? secondExpression);
 
-    protected abstract T ToResult(T firstValue, T secondValue);
+    protected abstract string? CreateExpressionSentence(string? firstExpressionSentence, string? secondExpressionSentence);
 }

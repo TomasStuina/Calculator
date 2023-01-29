@@ -7,9 +7,11 @@ public class Multiplication : BinaryOperation<double>
     {
     }
 
-    protected override string? PrintExpression(string? firstExpression, string? secondExpression) => $"({firstExpression} * {secondExpression})";
+    protected override string? CreateExpression(string? firstExpression, string? secondExpression) =>
+        $"({firstExpression} * {secondExpression})";
 
-    protected override string? PrintExpressionSentence(string? firstSentence, string? secondSentence) => $"multiplication of {firstSentence} and {secondSentence}";
+    protected override string? CreateExpressionSentence(string? firstSentence, string? secondSentence) =>
+        $"multiplication of {firstSentence} and {secondSentence}";
 
     protected override double ToResult(double firstValue, double secondValue) => firstValue * secondValue;
 }
