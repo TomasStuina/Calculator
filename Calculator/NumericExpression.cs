@@ -16,13 +16,13 @@ public abstract class NumericExpression<T> : INumericExpression where T : struct
 
     protected abstract string? CreateExpressionSentence();
 
-    public static implicit operator NumericExpression<T>(T value) => new NumericValue(value);
+    public static implicit operator NumericExpression<T>(T value) => new NumericValueExpression(value);
 
-    private class NumericValue : NumericExpression<T>
+    private class NumericValueExpression : NumericExpression<T>
     {
         private readonly T _value;
 
-        public NumericValue(T value)
+        public NumericValueExpression(T value)
         {
             _value = value;
         }
