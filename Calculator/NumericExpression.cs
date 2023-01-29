@@ -27,10 +27,6 @@ public abstract class NumericExpression<T> : INumericExpression where T : struct
             _value = value;
         }
 
-        public override string? Print() => CreateExpression();
-
-        public override string? PrintSentence() => CreateExpressionSentence();
-
         public override T ToResult() => _value;
 
         protected override string? CreateExpression() => _value.ToString();
