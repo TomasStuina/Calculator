@@ -1,27 +1,40 @@
 ﻿namespace Calculator;
 
-public class NumericExpression<T> where T : struct
+public abstract class NumericExpression<T> : INumericExpression where T : struct
 {
-    private readonly T _numericValue;
+    public virtual string? Print() => CreateExpression();
 
-    public NumericExpression(T numericValue)
+    public virtual string? PrintSentence() => CreateExpressionSentence();
+
+    public abstract T ToResult();
+
+    string? INumericExpression.ToExpression() => CreateExpression();
+
+    string? INumericExpression.ToExpressionSentence() => CreateExpressionSentence();
+
+    protected abstract string? CreateExpression();
+
+    protected abstract string? CreateExpressionSentence();
+
+    public static implicit operator NumericExpression<T>(T value) => new NumericValue(value);
+
+    private class NumericValue : NumericExpression<T>
     {
-        _numericValue = numericValue;
+        private readonly T _value;
+
+        public NumericValue(T value)
+        {
+            _value = value;
+        }
+
+        public override string? Print() => CreateExpression();
+
+        public override string? PrintSentence() => CreateExpressionSentence();
+
+        public override T ToResult() => _value;
+
+        protected override string? CreateExpression() => _value.ToString();
+
+        protected override string? CreateExpressionSentence() => _value.ToString();
     }
-
-    public virtual string? PrintSentence() => PrintExpressionSentence();
-
-    public virtual string? Print() => PrintExpression();
-
-    public virtual string? PrintExpressionSentence() => PrintExpression();
-
-    public virtual string? PrintExpression() => ToResult().ToString();
-
-    public virtual T ToResult() => _numericValue;
-
-
-    public static implicit operator NumericExpression<T>(T value) => new(value);
-
-
-    public static implicit operator T(NumericExpression<T> value) => value.ToResult();
 }

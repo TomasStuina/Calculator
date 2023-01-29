@@ -2,11 +2,7 @@
 
 public abstract class NumericOperation<T> : NumericExpression<T> where T : struct
 {
-    protected NumericOperation() : base(default)
-    {
-    }
+    public sealed override string? Print() => $"{CreateExpression()} = {ToResult()}";
 
-    public sealed override string? PrintSentence() => $"{PrintExpressionSentence()} is {ToResult()}";
-
-    public sealed override string? Print() => $"{PrintExpression()} = {ToResult()}";
+    public sealed override string? PrintSentence() => $"{CreateExpressionSentence()} is {ToResult()}";
 }

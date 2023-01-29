@@ -6,13 +6,14 @@ public class Fraction : NumericExpression<double>
     private readonly NumericExpression<double> _denominator;
 
     public Fraction(NumericExpression<double> numerator, NumericExpression<double> denominator)
-        : base(numerator / denominator.ThrowIfZero())
     {
-        _numerator = numerator;
-        _denominator = denominator;
+        _numerator = numerator.ThrowIfNotInteger();
+        _denominator = denominator.ThrowIfNotInteger().ThrowIfZero();
     }
 
-    public override string? PrintExpressionSentence() => $"{_numerator.ToResult()}/{_denominator.ToResult()}";
+    public override double ToResult() => _numerator.ToResult() / _denominator.ToResult();
 
-    public override string? PrintExpression() => $"({PrintExpressionSentence()})";
+    protected override string? CreateExpression() => $"{_numerator.ToResult()}/{_denominator.ToResult()}";
+
+    protected override string? CreateExpressionSentence() => CreateExpression();
 }

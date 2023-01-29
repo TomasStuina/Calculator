@@ -2,22 +2,24 @@
 
 public abstract class UnaryOperation<T> : NumericOperation<T> where T : struct
 {
-    private readonly NumericExpression<T> _operand;
+    private readonly INumericExpression? _operand;
+    private readonly T _operandValue;
 
-    public UnaryOperation(NumericExpression<T> operand)
+    protected UnaryOperation(NumericExpression<T> operand)
     {
         _operand = operand;
+        _operandValue = operand.ToResult();
     }
 
-    public sealed override T ToResult() => ToResult(_operand.ToResult());
+    public sealed override T ToResult() => ToResult(_operandValue);
 
-    public sealed override string? PrintExpression() => PrintExpression(_operand.PrintExpression());
+    protected sealed override string? CreateExpression() => CreateExpression(_operand?.ToExpression());
 
-    public sealed override string? PrintExpressionSentence() => PrintExpressionSentence(_operand.PrintExpressionSentence());
+    protected sealed override string? CreateExpressionSentence() => CreateExpressionSentence(_operand?.ToExpressionSentence());
 
-    protected abstract string? PrintExpression(string? expression);
+    protected abstract T ToResult(T operandValue);
 
-    protected abstract string? PrintExpressionSentence(string? sentence);
+    protected abstract string? CreateExpression(string? expression);
 
-    protected abstract T ToResult(T value);
+    protected abstract string? CreateExpressionSentence(string? expressionSentence);
 }
